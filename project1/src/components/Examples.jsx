@@ -28,7 +28,7 @@ function Examples() {
   }
 
   return (
-    <Section title="Examples" id="examples">
+    <Section title="Examples 2" id="examples">
       <menu>
         <TabButton
           isSelected={selectedTopic == "components"}
