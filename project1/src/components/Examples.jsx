@@ -63,7 +63,6 @@ function Examples() {
       >
         {tableContent}
       </Tabs>
-      <menu></menu>
     </Section>
   );
 }
