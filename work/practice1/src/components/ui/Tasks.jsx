@@ -38,7 +38,7 @@ function Tasks({ project, setProjects, setActiveProject }) {
       >
         <Input
           placeholder="Add a task"
-          className="bg-gray-300  bg-white"
+          className=" bg-white"
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
         />
