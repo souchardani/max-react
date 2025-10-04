@@ -34,11 +34,11 @@ function NewProject({ setAddingNewProject, setProjects, setActiveProject }) {
     setProjects((oldProjects) => [...oldProjects, newProject]);
   }
   return (
-    <div className="w-4/6 py-12 px-10">
-      <header className="flex justify-between items-center">
+    <div>
+      <header>
         <Title2>Add new Project</Title2>
-        <div>
-          <Button onClick={handleCancel} variant="link">
+        <div className="grid">
+          <Button onClick={handleCancel} className="outline">
             Cancel
           </Button>
           <Button onClick={handleCreateProject} variant="secondary" size="sm">
@@ -46,19 +46,17 @@ function NewProject({ setAddingNewProject, setProjects, setActiveProject }) {
           </Button>
         </div>
       </header>
-      <section className="w-2/3 grid gap-12 mt-12">
-        <div className="grid gap-3">
+      <form>
+        <fieldset>
           <Label htmlFor="title">Title</Label>
           <Input
-            className="w-full bg-white"
             type="text"
             id="title"
             placeholder="Enter the title."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-        </div>
-        <div className="grid gap-3">
+
           <Label htmlFor="message">Description</Label>
           <Textarea
             className="bg-white"
@@ -67,40 +65,18 @@ function NewProject({ setAddingNewProject, setProjects, setActiveProject }) {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-        </div>
-        {/* datepicker */}
-        <div className="flex flex-col gap-3">
           <Label htmlFor="date" className="px-1">
             Due Date
           </Label>
-          <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                id="date"
-                className="w-48 justify-between font-normal"
-              >
-                {date ? date.toLocaleDateString() : "Select date"}
-                <ChevronDownIcon />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent
-              className="w-auto overflow-hidden p-0"
-              align="start"
-            >
-              <Calendar
-                mode="single"
-                selected={date}
-                captionLayout="dropdown"
-                onSelect={(date) => {
-                  setDate(date);
-                  setOpen(false);
-                }}
-              />
-            </PopoverContent>
-          </Popover>
-        </div>
-      </section>
+
+          <input
+            type="date"
+            selected={date}
+            value={date ? date.toISOString().split("T")[0] : ""}
+            onChange={(e) => setDate(new Date(e.target.value))}
+          />
+        </fieldset>
+      </form>
     </div>
   );
 }

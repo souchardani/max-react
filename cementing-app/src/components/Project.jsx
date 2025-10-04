@@ -1,6 +1,3 @@
-import Title2 from "./ui/Title2";
-import { Button } from "@/components/ui/button";
-import { IconTrashX } from "@tabler/icons-react";
 import Tasks from "./ui/Tasks";
 
 function Project({ project, setProjects, setActiveProject }) {
@@ -12,17 +9,9 @@ function Project({ project, setProjects, setActiveProject }) {
   }
 
   return (
-    <div className="py-12 px-10 relative">
-      <Button
-        variant="destructive"
-        size="icon"
-        className="size-8 absolute top-4 right-4"
-        onClick={handleDelete}
-      >
-        <IconTrashX />
-      </Button>
-
-      <Title2 className="py-2">{project.name}</Title2>
+    <div>
+      <h2 className="py-2">{project.name}</h2>
+      <button onClick={handleDelete}>delete</button>
       <p className="text-muted-foreground text-sm ">{project.date}</p>
       {/* description */}
       <p className="py-8">{project.description}</p>

@@ -1,6 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { IconPlus } from "@tabler/icons-react";
-import Title2 from "./ui/Title2.jsx";
 
 function Aside({ projects, setActiveProject, setAddingNewProject }) {
   function handleClick(index) {
@@ -15,22 +13,26 @@ function Aside({ projects, setActiveProject, setAddingNewProject }) {
   }
 
   return (
-    <aside className="w-2/6 min-h-lvh bg-blue-300 rounded-2xl flex flex-col items-center">
-      <Title2 className="py-6 px-2">Your projects</Title2>
-      <Button variant="secondary" size="sm" onClick={handleAddProject}>
-        <IconPlus /> New Project
-      </Button>
-      {/* projects list */}
-      <div className="my-12">
+    <aside className="aside">
+      <h2>Your projects</h2>
+      <div className="grid">
+        <Button className="my" onClick={handleAddProject}>
+          Add Project
+        </Button>
+      </div>
+      <div>
         {projects && projects.length > 0
           ? projects.map((project, index) => (
-              <div
-                onClick={(e) => handleClick(index)}
-                className="cursor-pointer p-1 border-b border-b-blue-800 my-2 hover:bg-blue-400 rounded"
-                key={project.name}
-              >
-                {project.name}
-              </div>
+              <>
+                <div
+                  id="projects-aside"
+                  onClick={(e) => handleClick(index)}
+                  key={project.name}
+                >
+                  {project.name}
+                </div>
+                <hr />
+              </>
             ))
           : "you have no proyects yet"}
       </div>
