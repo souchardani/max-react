@@ -1,19 +1,24 @@
 import Aside from "./components/Aside";
 import Project from "./components/Project";
-import Title2 from "./components/ui/Title2";
 import NewProject from "./components/NewProject";
-import MainContextProvider from "./store/main-context";
 import { useContext } from "react";
 import { MainContext } from "./store/main-context";
 import "./index.css";
+
+export interface User {
+  isSubscribed: Boolean;
+  name: String;
+}
 
 function App() {
   const mainCtx = useContext(MainContext);
   return (
     <div className="container">
-      <header>
-        <h1>Project Manager</h1>
-      </header>
+      <section>
+        <header>
+          <h1>Project Manager</h1>
+        </header>
+      </section>
 
       <div>
         <Aside
@@ -33,19 +38,14 @@ function App() {
             </div>
           ) : (
             <div>
-              <Title2>select a project</Title2>
+              <h2>select a project</h2>
             </div>
           )
         ) : (
-          <NewProject
-            setAddingNewProject={mainCtx.setAddingNewProject}
-            setProjects={mainCtx.setProjects}
-            setActiveProject={mainCtx.setActiveProject}
-          />
+          <NewProject />
         )}
       </div>
     </div>
   );
 }
-
 export default App;

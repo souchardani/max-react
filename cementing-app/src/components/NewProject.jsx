@@ -4,23 +4,20 @@ import { IconFolderPlus } from "@tabler/icons-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { ChevronDownIcon } from "lucide-react";
 import { useState } from "react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
+import { MainContext } from "../store/main-context";
+import { useContext } from "react";
 
-function NewProject({ setAddingNewProject, setProjects, setActiveProject }) {
+function NewProject() {
+  const ctx = useContext(MainContext);
+
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(undefined);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   function handleCancel() {
-    setAddingNewProject((old) => false);
+    ctx.setAddingNewProject((old) => false);
   }
 
   function handleCreateProject() {
@@ -31,16 +28,19 @@ function NewProject({ setAddingNewProject, setProjects, setActiveProject }) {
       tasks: [],
     };
 
-    setProjects((oldProjects) => [...oldProjects, newProject]);
+    ctx.setProjects((oldProjects) => [...oldProjects, newProject]);
+    ctx.setActiveProject((old) => {
+      return newProject;
+    });
+
+    ctx.setAddingNewProject((old) => false);
   }
   return (
     <div>
       <header>
         <Title2>Add new Project</Title2>
-        <div className="grid">
-          <Button onClick={handleCancel} className="outline">
-            Cancel
-          </Button>
+        <div>
+          <Button onClick={handleCancel}>Cancel</Button>
           <Button onClick={handleCreateProject} variant="secondary" size="sm">
             <IconFolderPlus /> Save
           </Button>
@@ -48,33 +48,34 @@ function NewProject({ setAddingNewProject, setProjects, setActiveProject }) {
       </header>
       <form>
         <fieldset>
-          <Label htmlFor="title">Title</Label>
-          <Input
-            type="text"
-            id="title"
-            placeholder="Enter the title."
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-
-          <Label htmlFor="message">Description</Label>
-          <Textarea
-            className="bg-white"
-            placeholder="Type the description here."
-            id="message"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <Label htmlFor="date" className="px-1">
-            Due Date
-          </Label>
-
-          <input
-            type="date"
-            selected={date}
-            value={date ? date.toISOString().split("T")[0] : ""}
-            onChange={(e) => setDate(new Date(e.target.value))}
-          />
+          <div>
+            <Label htmlFor="title">Title</Label>
+            <Input
+              type="text"
+              id="title"
+              placeholder="Enter the title."
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+          <div>
+            <Label htmlFor="message">Description</Label>
+            <Textarea
+              placeholder="Type the description here."
+              id="message"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+          <div>
+            <Label htmlFor="date">Due Date</Label>
+            <input
+              type="date"
+              selected={date}
+              value={date ? date.toISOString().split("T")[0] : ""}
+              onChange={(e) => setDate(new Date(e.target.value))}
+            />
+          </div>
         </fieldset>
       </form>
     </div>

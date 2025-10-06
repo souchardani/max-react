@@ -49,16 +49,15 @@ function Tasks({ project, setProjects, setActiveProject }) {
       <div className="shadow-lg rounded-lg my-8 p-4">
         {project.tasks && project.tasks.length > 0 ? (
           project.tasks.map((task) => (
-            <div key={task} className="flex justify-between py-1">
+            <section className="grid" key={task}>
               {task}
               <Button
-                className="hover:text-red-500"
-                variant="link"
+                className="contrast"
                 onClick={(e) => handleClearTask(task)}
               >
                 Clear
               </Button>
-            </div>
+            </section>
           ))
         ) : (
           <p>This project have no tasks.</p>

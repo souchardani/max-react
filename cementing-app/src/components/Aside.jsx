@@ -13,30 +13,23 @@ function Aside({ projects, setActiveProject, setAddingNewProject }) {
   }
 
   return (
-    <aside className="aside">
+    <div>
       <h2>Your projects</h2>
-      <div className="grid">
-        <Button className="my" onClick={handleAddProject}>
-          Add Project
-        </Button>
+      <div>
+        <Button onClick={handleAddProject}>Add Project</Button>
       </div>
       <div>
         {projects && projects.length > 0
           ? projects.map((project, index) => (
               <>
-                <div
-                  id="projects-aside"
-                  onClick={(e) => handleClick(index)}
-                  key={project.name}
-                >
+                <div onClick={(e) => handleClick(index)} key={project.name}>
                   {project.name}
                 </div>
-                <hr />
               </>
             ))
           : "you have no proyects yet"}
       </div>
-    </aside>
+    </div>
   );
 }
 
