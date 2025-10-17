@@ -24,7 +24,7 @@ function NewProject() {
     let newProject = {
       name: title,
       description,
-      date: date.toLocaleDateString("sv-SE"),
+      date: date && date.toLocaleDateString("sv-SE"),
       tasks: [],
     };
 
@@ -32,7 +32,7 @@ function NewProject() {
     ctx.setActiveProject((old) => {
       return newProject;
     });
-
+    console.log(newProject);
     ctx.setAddingNewProject((old) => false);
   }
   return (
@@ -41,13 +41,12 @@ function NewProject() {
         <Title2>Add new Project</Title2>
         <div>
           <Button onClick={handleCancel}>Cancel</Button>
-          <Button onClick={handleCreateProject} variant="secondary" size="sm">
-            <IconFolderPlus /> Save
-          </Button>
+          <Button onClick={handleCreateProject}>Add project</Button>
         </div>
       </header>
       <form>
         <fieldset>
+          <legend>add a new project</legend>
           <div>
             <Label htmlFor="title">Title</Label>
             <Input

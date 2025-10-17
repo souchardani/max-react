@@ -1,6 +1,16 @@
 import Tasks from "./ui/Tasks";
+import { useContext } from "react";
+import { MainContext } from "../store/main-context";
 
-function Project({ project, setProjects, setActiveProject }) {
+function Project() {
+  const mainCtx = useContext(MainContext);
+
+  const {
+    activeProject: project,
+    setProjects,
+    setActiveProject,
+  } = mainCtx || {};
+
   function handleDelete() {
     setProjects((oldProjects) =>
       oldProjects.filter((actualProject) => project.name !== actualProject.name)

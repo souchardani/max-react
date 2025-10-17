@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { useMainContext } from "../store/main-context";
 
-function Aside({ projects, setActiveProject, setAddingNewProject }) {
+function Aside() {
+  const { projects, setActiveProject, setAddingNewProject } = useMainContext();
+
   function handleClick(index) {
     setAddingNewProject((old) => false);
     setActiveProject((old) => {
@@ -21,11 +24,9 @@ function Aside({ projects, setActiveProject, setAddingNewProject }) {
       <div>
         {projects && projects.length > 0
           ? projects.map((project, index) => (
-              <>
-                <div onClick={(e) => handleClick(index)} key={project.name}>
-                  {project.name}
-                </div>
-              </>
+              <div onClick={(e) => handleClick(index)} key={project.name}>
+                {project.name}
+              </div>
             ))
           : "you have no proyects yet"}
       </div>

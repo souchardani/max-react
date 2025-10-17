@@ -21,20 +21,12 @@ function App() {
       </section>
 
       <div>
-        <Aside
-          projects={mainCtx.projects}
-          setAddingNewProject={mainCtx.setAddingNewProject}
-          setActiveProject={mainCtx.setActiveProject}
-        />
+        <Aside />
 
         {!mainCtx.addingNewProject ? (
           mainCtx.activeProject ? (
             <div>
-              <Project
-                project={mainCtx.activeProject}
-                setProjects={mainCtx.setProjects}
-                setActiveProject={mainCtx.setActiveProject}
-              />
+              <Project />
             </div>
           ) : (
             <div>
